@@ -1,50 +1,56 @@
-# React + TypeScript + Vite
+React Frontend for Book Chapters
+This is a simple React frontend application designed to interface with a pre-built Express API backend. It allows users to view a list of book chapters and their contents.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+Table of Contents: Displays a list of chapters fetched from the backend.
+Chapter Content View: Users can click on a chapter to view its content.
+Dynamic Path Updates: The application updates the browser's URL to reflect the selected chapter
 
-Currently, two official plugins are available:
+Prerequisites
+Backend: A ready-made Express API backend must be running and accessible. The backend should expose the following endpoints:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GET /chapters: Returns a list of chapters and the book name.
+GET /chapters/:chapter: Returns the content of a specific chapter.
+Node.js and npm/yarn: Ensure you have Node.js installed on your system.
 
-## Expanding the ESLint configuration
+Setup
+Clone the Repository:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+bash
+Copy code
+git clone <repository-url>
+cd <repository-directory>
+Install Dependencies:
 
-- Configure the top-level `parserOptions` property like this:
+bash
+Copy code
+npm install
+# or
+yarn install
+Set API Base URL: Update the API base URL in src/services/requests.ts to point to the backend:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+typescript
+Copy code
+const API_BASE_URL = "http://localhost:5000"; // Update with your backend URL
+Start the Development Server:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+bash
+Copy code
+npm start
+# or
+yarn start
+The app will be available at http://localhost:3000.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Usage
+Open the app in your browser.
+The Table of Contents is displayed on the sidebar.
+Click on a chapter to view its content. The chapter's path will update in the browser URL.
+API Integration
+The frontend interacts with the backend API using the following functions defined in src/services/requests.ts:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+getAllChapters(): Fetches the list of chapters and the book name.
+getChapter(chapter: string): Fetches the content for a specific chapter.
+Tech Stack
+Frontend: React, TypeScript
+Styling: PureCSS
+Routing: React Router (if applicable)
