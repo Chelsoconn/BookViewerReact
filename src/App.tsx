@@ -2,18 +2,24 @@ import { useState, useEffect } from "react";
 import { Menu } from "./components/menu.tsx";
 import { Main } from "./components/main.tsx";
 import { getAllChapters, getChapter } from "./services/requests";
-import { Chapters, Title, ChapterTitle, ChapterContent, EventType, ClickFunction } from "./types/types.ts";
+import {
+  Chapters,
+  Title,
+  ChapterTitle,
+  ChapterContent,
+  EventType,
+  ClickFunction,
+} from "./types/types.ts";
 
 function App() {
-
   const [allChapters, setAllChapters] = useState<Chapters>(undefined);
 
   const [bookName, setBookName] = useState<Title>(undefined);
 
   const [currentChapter, setCurrentChapter] = useState<ChapterTitle>(undefined);
 
-  const [currentChapterContent, setCurrentChapterContent] = useState<ChapterContent>(undefined);
-
+  const [currentChapterContent, setCurrentChapterContent] =
+    useState<ChapterContent>(undefined);
 
   useEffect(() => {
     const getChapters = async () => {
@@ -22,7 +28,6 @@ function App() {
 
         setAllChapters(allContent.chapters);
         setBookName(allContent.book);
-
       } catch (error) {
         console.error("Error fetching chapters:", error);
       }
@@ -30,9 +35,10 @@ function App() {
     getChapters();
   }, []);
 
-
-
-  const clickable: ClickFunction = async (chapter: ChapterTitle, e: EventType) => {
+  const clickable: ClickFunction = async (
+    chapter: ChapterTitle,
+    e: EventType
+  ) => {
     try {
       e.preventDefault();
       setCurrentChapter(chapter);
@@ -43,15 +49,9 @@ function App() {
     }
   };
 
-
-
   return (
     <div id="layout">
-
-      <Menu 
-        allChapters={allChapters} 
-        onClick={clickable} 
-      />
+      <Menu allChapters={allChapters} onClick={clickable} />
       <Main
         bookName={bookName}
         allChapters={allChapters}
@@ -59,7 +59,6 @@ function App() {
         onClick={clickable}
         currentChapter={currentChapter}
       />
-
     </div>
   );
 }

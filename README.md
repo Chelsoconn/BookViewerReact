@@ -4,7 +4,6 @@ This is a simple React frontend application designed to interface with a pre-bui
 **Features**
 Table of Contents: Displays a list of chapters fetched from the backend.
 Chapter Content View: Users can click on a chapter to view its content.
-Dynamic Path Updates: The application updates the browser's URL to reflect the selected chapter
 
 **Prerequisites**
 Backend: A ready-made Express API backend must be running and accessible. The backend should expose the following endpoints:
